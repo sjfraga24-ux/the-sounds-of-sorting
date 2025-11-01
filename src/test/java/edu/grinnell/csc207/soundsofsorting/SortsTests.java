@@ -35,6 +35,9 @@ public class SortsTests {
     public void testSort(Consumer<Integer[]> func) {
         Integer[] arr = makeTestArray();
         func.accept(arr);
+        for(int i = 0; i < arr.length; i++){
+            System.err.println(arr[i]);
+        }
         assertTrue(sorted(arr));
     }
 
@@ -61,5 +64,10 @@ public class SortsTests {
     @Test
     public void testQuickSort() {
         testSort(Sorts::quickSort);
+    }
+
+    @Test
+    public void testExchangeSort() {
+        testSort(Sorts::exchangeSort);
     }
 }

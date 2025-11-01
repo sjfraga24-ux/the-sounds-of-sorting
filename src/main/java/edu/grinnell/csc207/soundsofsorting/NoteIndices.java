@@ -6,12 +6,22 @@ package edu.grinnell.csc207.soundsofsorting;
  * in the program.
  */
 public class NoteIndices {
+    Integer[] scale;
+    boolean playedNote;
+
     /**
      * @param n the size of the scale object that these indices map into
      */
     public NoteIndices(int n) {
-        // TODO: fill me in!
+        scale = new Integer[n];
     }
+
+    public static <T> void swap(T[] arr, int i, int j) {
+        T tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
     
     /**
      * Reinitializes this collection of indices to map into a new scale object
@@ -20,13 +30,20 @@ public class NoteIndices {
      * @param n the size of the scale object that these indices map into
      */
     public void initializeAndShuffle(int n) {
-        // TODO: fill me in!
-    }
+       int rand;
+       
+       for(int i = 0; i< scale.length; i++){
+        rand = (int) Math.random()*scale.length;
+        swap(scale, i, rand);
+       }
+       Integer[] newScale = new Integer[n];
+       System.arraycopy(scale, 0, newScale, 0, scale.length-1);
+       scale = newScale;
+    }   
     
     /** @return the indices of this NoteIndices object */
     public Integer[] getNotes() { 
-        // TODO: fill me in!
-        return null;
+        return scale;
     }
     
     /**
@@ -34,7 +51,8 @@ public class NoteIndices {
      * @param index the index to highlight
      */
     public void highlightNote(int index) {
-        // TODO: fill me in
+        Scale.playNote(index, true);
+        playedNote = true;
     }
     
     /**
@@ -42,12 +60,14 @@ public class NoteIndices {
      * @return true if the given index is highlighted
      */
     public boolean isHighlighted(int index) {
-        // TODO: fill me in
+        if(playedNote){
+            return true;
+        }
         return false;
     }
     
     /** Clears all highlighted indices from this collection */
     public void clearAllHighlighted() {
-        // TODO: fill me in
+        playedNote = false;
     }
 }

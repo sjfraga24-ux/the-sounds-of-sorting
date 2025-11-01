@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 public class ArrayPanel extends JPanel {
     @SuppressWarnings("unused")
     private NoteIndices notes;
+    int width;
    
     /**
      * Create a new <code>ArrayPanel</code> with the given notes and dimensions.
@@ -18,12 +19,16 @@ public class ArrayPanel extends JPanel {
      * @param height the height of the panel
      */
     public ArrayPanel(NoteIndices notes, int width, int height) {
+        this.width = width;
         this.notes = notes;
         this.setPreferredSize(new Dimension(width, height));
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        // TODO: fill me in!
+        for(int i = 0; i< width; i+= (width/notes.scale.length)){
+            g.drawRect(0, i, 6, (int)notes.getNotes()[i]);
+        }
+            
     }
 }

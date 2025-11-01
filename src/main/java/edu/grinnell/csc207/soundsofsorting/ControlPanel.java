@@ -10,7 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import edu.grinnell.csc207.soundsofsorting.sortevents.CompareEvent;
+import edu.grinnell.csc207.soundsofsorting.sortevents.CopyEvent;
 import edu.grinnell.csc207.soundsofsorting.sortevents.SortEvent;
+import edu.grinnell.csc207.soundsofsorting.sortevents.SwapEvent;
 import edu.grinnell.csc207.soundsofsorting.sorts.Sorts;
 
 /**
@@ -135,11 +138,14 @@ public class ControlPanel extends JPanel {
                 }
                 isSorting = true;
                 
-                // TODO: fill me in!
+        
                 // 1. Create the sorting events list
                 // 2. Add in the compare events to the end of the list
                 List<SortEvent<Integer>> events = new java.util.LinkedList<>();
-                
+                CompareEvent<Integer> compares = null;
+                SwapEvent<Integer> swaps = null;
+                CopyEvent<Integer> copies = null;
+                events.addLast(compares);
                 // NOTE: The Timer class repetitively invokes a method at a
                 //       fixed interval.  Here we are specifying that method
                 //       by creating an _anonymous subclass_ of the TimeTask
@@ -155,9 +161,13 @@ public class ControlPanel extends JPanel {
                             SortEvent<Integer> e = events.get(index++);
                             // TODO: fill me in!
                             // 1. Apply the next sort event.
+                                events.add(swaps);
+
                             // 3. Play the corresponding notes denoted by the
                             //    affected indices logged in the event.
+                            scale.playNote(index, isSorting);
                             // 4. Highlight those affected indices.
+                            scale.highlightNote(index);
                             panel.repaint();
                         } else {
                             this.cancel();
