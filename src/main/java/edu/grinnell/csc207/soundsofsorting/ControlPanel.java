@@ -142,9 +142,9 @@ public class ControlPanel extends JPanel {
                 // 1. Create the sorting events list
                 // 2. Add in the compare events to the end of the list
                 List<SortEvent<Integer>> events = new java.util.LinkedList<>();
-                CompareEvent<Integer> compares = null;
-                SwapEvent<Integer> swaps = null;
-                CopyEvent<Integer> copies = null;
+                CompareEvent<Integer> compares = new CompareEvent<>();
+                SwapEvent<Integer> swaps = new SwapEvent<>();
+                CopyEvent<Integer> copies = new CopyEvent<>();
                 events.addLast(compares);
                 // NOTE: The Timer class repetitively invokes a method at a
                 //       fixed interval.  Here we are specifying that method
@@ -161,13 +161,13 @@ public class ControlPanel extends JPanel {
                             SortEvent<Integer> e = events.get(index++);
                             // TODO: fill me in!
                             // 1. Apply the next sort event.
-                                events.add(swaps);
+                                e.apply(notes.getNotes());
 
                             // 3. Play the corresponding notes denoted by the
                             //    affected indices logged in the event.
                             scale.playNote(index, isSorting);
                             // 4. Highlight those affected indices.
-                            scale.highlightNote(index);
+                            notes.highlightNote(index);
                             panel.repaint();
                         } else {
                             this.cancel();

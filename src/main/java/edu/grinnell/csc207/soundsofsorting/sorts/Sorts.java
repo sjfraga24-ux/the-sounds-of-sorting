@@ -172,7 +172,9 @@ public class Sorts {
     }
 
     public static <T extends Comparable<? super T>> void quickSortHelper(T[] arr, int cur1, int cur2) {
-        if (cur1 >= cur2) return;
+        if (cur1 >= cur2){
+            return;
+        } 
 
         int c1 = cur1;
         int c2 = cur2 - 1;
@@ -207,9 +209,9 @@ public class Sorts {
      */
     
     public static <T extends Comparable<? super T>> List<SortEvent<Integer>> exchangeSort(T[] arr){
-        CompareEvent<Integer> compares = null;
-        SwapEvent<Integer> swaps = null;
-        CopyEvent<Integer> copies = null;
+        CompareEvent<Integer> compares = new CompareEvent<>();
+        SwapEvent<Integer> swaps = new SwapEvent<>();
+        CopyEvent<Integer> copies = new CopyEvent<>();
         List<SortEvent<Integer>> events = new ArrayList<SortEvent<Integer>>();
         events.add(compares);
         events.add(copies);
@@ -233,7 +235,8 @@ public class Sorts {
         return events;
     }
     /**
-     * 
+     * given an array of Ts and list of SortEvent<T> objects, the function will apply those 
+     * events to the list in-order
      * @param <T> the carrier type of the array
      * @param l : an array of <T>s
      * @param events : A list of SortEvent objects

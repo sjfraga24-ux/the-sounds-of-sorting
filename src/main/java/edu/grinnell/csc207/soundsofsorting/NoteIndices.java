@@ -51,7 +51,6 @@ public class NoteIndices {
      * @param index the index to highlight
      */
     public void highlightNote(int index) {
-        Scale.playNote(index, true);
         playedNote = true;
     }
     
