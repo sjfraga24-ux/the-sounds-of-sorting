@@ -1,20 +1,25 @@
 package edu.grinnell.csc207.soundsofsorting.sortevents;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A <code>CopyEvent</code> logs a copy of a value into an index of the array.
  */
 public class CopyEvent<T> implements SortEvent<T>{
-    public List<Integer> indices;
+    public List<Integer> indices = new ArrayList<Integer>();
     public T value;
 
+    public CopyEvent(T value, List<Integer> indices){
+        this.value = value;
+        this.indices = indices;
+    }
+
+
     @Override
+    //Used in Merge Sort when comparing the two values and putting them into the final arr.
     public void apply(T[] arr) {
-         for(int i = 0; i < indices.size(); i++){
-            arr[indices.get(i)] = value;
-        }
-        
+        arr[indices.get(0)] = value;
     }
 
     @Override

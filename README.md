@@ -1,8 +1,8 @@
 # CSC 207: The Sounds of Sorting
 
-Author: _(TODO: insert your name here!)_
+Author: Sydney
 
 ## Resources
 
-*   _(TODO: list your resources here!)_
+*  Attended mentor sessions and met with the professor
 *   ...

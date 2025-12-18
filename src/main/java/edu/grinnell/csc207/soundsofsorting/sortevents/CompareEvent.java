@@ -1,5 +1,6 @@
 package edu.grinnell.csc207.soundsofsorting.sortevents;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,15 +8,14 @@ import java.util.List;
  * indices in the array.
  */
 public class CompareEvent<T extends Comparable<? super T>> implements SortEvent<T>{
-    public List<Integer> indices;
+    public List<Integer> indices = new ArrayList<>();
+
+    public CompareEvent(List<Integer> indices){
+        this.indices = indices;
+    }
 
     @Override
-    public void apply(T[] arr) {
-        for(int i = 0; i < indices.size(); i+=2){
-            arr[indices.get(i)].compareTo(arr[indices.get(i+1)]);
-        }
-        
-    }
+    public void apply(T[] arr) {}
 
     @Override
     public List<Integer> getAffectedIndices() {

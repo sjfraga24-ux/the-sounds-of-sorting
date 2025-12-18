@@ -4,6 +4,8 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+//paint components built by me
+
 /**
  * A drawing panel for visualizing the contents of a @NoteIndices object.
  */
@@ -26,9 +28,31 @@ public class ArrayPanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        for(int i = 0; i< width; i+= (width/notes.scale.length)){
-            g.drawRect(0, i, 6, (int)notes.getNotes()[i]);
+        int barWidth = width/notes.scale.size();
+        int idx = 0;
+        if(notes.getNotes().length == 17){
+            for(int i = 0, j = 0; j < notes.getNotes().length; i+= barWidth, j++){
+                if(notes.isHighlighted(j)){
+                    
+                    for(int z = j+1; z < notes.getNotes().length; z++){
+                        if(notes.isHighlighted(z)){
+                            idx = z;
+                            notes.clearAllHighlighted();
+                        }
+                    }
+                    // g.drawRect(,0, barWidth, ControlPanel.bMinorPentatonicValues[(int)(notes.getNotes()[idx])]};
+                    g.drawRect(i, 0, barWidth, ControlPanel.bMinorPentatonicValues[(int)(notes.getNotes()[idx])]);
+  
+                }else{
+                    g.drawRect(i, 0, barWidth, ControlPanel.bMinorPentatonicValues[(int)(notes.getNotes()[j])]);
+                }
+            }
+        }else{
+            for(int i = 0, j = 0; j < notes.getNotes().length; i+= barWidth, j++){
+                g.drawRect(i, 0, barWidth, ControlPanel.chromaticValues[(int)(notes.getNotes()[j])]);
+            }
         }
+        
             
     }
 }

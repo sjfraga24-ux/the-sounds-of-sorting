@@ -2,10 +2,12 @@ package edu.grinnell.csc207.soundsofsorting;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Test;
 
+import edu.grinnell.csc207.soundsofsorting.sortevents.SortEvent;
 import edu.grinnell.csc207.soundsofsorting.sorts.Sorts;
 
 public class SortsTests {
@@ -45,10 +47,30 @@ public class SortsTests {
     public void testBubbleSort() {
         testSort(Sorts::bubbleSort);
     }
+
+    @Test
+    public void testBubbleEvent(){
+        Integer[] arr = makeTestArray();
+        List<SortEvent<Integer>> events = Sorts.bubbleSort(arr);
+        for(int i = 0; i < events.size(); i++){
+            events.get(i).apply(arr);
+        }
+        assertTrue(sorted(arr));
+    }
     
     @Test
     public void testInsertionSort() {
         testSort(Sorts::insertionSort);
+    }
+
+    @Test
+    public void testInsertionEvent(){
+        Integer[] arr = makeTestArray();
+        List<SortEvent<Integer>> events = Sorts.insertionSort(arr);
+        for(int i = 0; i < events.size(); i++){
+            events.get(i).apply(arr);
+        }
+        assertTrue(sorted(arr));
     }
     
     @Test
@@ -57,13 +79,42 @@ public class SortsTests {
     }
 
     @Test
+    public void testSelectionEvent(){
+        Integer[] arr = makeTestArray();
+        List<SortEvent<Integer>> events = Sorts.selectionSort(arr);
+        for(int i = 0; i < events.size(); i++){
+            events.get(i).apply(arr);
+        }
+        assertTrue(sorted(arr));
+    }
+
+    @Test
     public void testMergeSort() {
         testSort(Sorts::mergeSort);
+    }
+
+    @Test
+    public void testMergeEvent(){
+        Integer[] arr = makeTestArray();
+        List<SortEvent<Integer>> events = Sorts.mergeSort(arr);
+        for(int i = 0; i < events.size(); i++){
+            events.get(i).apply(arr);
+        }
+        assertTrue(sorted(arr));
     }
     
     @Test
     public void testQuickSort() {
         testSort(Sorts::quickSort);
+    }
+    @Test
+    public void testQuickEvent(){
+        Integer[] arr = makeTestArray();
+        List<SortEvent<Integer>> events = Sorts.quickSort(arr);
+        for(int i = 0; i < events.size(); i++){
+            events.get(i).apply(arr);
+        }
+        assertTrue(sorted(arr));
     }
 
     @Test
