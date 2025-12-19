@@ -51,6 +51,8 @@ public class ControlPanel extends JPanel {
                 return Sorts.mergeSort(arr);
             case("Quick"):
                 return Sorts.quickSort(arr);
+            case("Exchange"):
+                return Sorts.exchangeSort(arr);
             default:
                 throw new IllegalArgumentException("generateEvents");
         }
@@ -100,7 +102,8 @@ public class ControlPanel extends JPanel {
             "Insertion",
             "Bubble",
             "Merge",
-            "Quick"
+            "Quick",
+            "Exchange"
         });
         add(sorts);
         
@@ -139,7 +142,7 @@ public class ControlPanel extends JPanel {
                 // 1. Create the sorting events list
                 Integer[] copy = new Integer[notes.getNotes().length];
                 System.arraycopy(notes.getNotes(), 0, copy, 0, notes.getNotes().length);
-                List<SortEvent<Integer>> events = generateEvents((String)(sorts.getSelectedItem()), notes.getNotes());
+                List<SortEvent<Integer>> events = generateEvents((String)(sorts.getSelectedItem()), copy);
 
                 ///make copy of arr using arrayscopy of
                 ///     then sort that arr instead.
@@ -158,10 +161,11 @@ public class ControlPanel extends JPanel {
                     public void run() {
                         if (index < events.size()) {
                             SortEvent<Integer> e = events.get(index++);
+                            notes.clearAllHighlighted();
                             // TODO: fill me in!
                             // 1. Apply the next sort event.
-                                e.apply(copy);
-
+                            e.apply(notes.getNotes());
+                            
                             // 3. Play the corresponding notes denoted by the
                             //    affected indices logged in the event.
                             // 4. Highlight those affected indices.

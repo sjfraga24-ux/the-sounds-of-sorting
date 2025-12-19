@@ -192,15 +192,36 @@ public class Sorts {
                 events.add(copies);
                 new_arr[newcur++] = arr[cur1++];
             } else {
+
+                List<Integer> copyIndices = new ArrayList<>();
+                copyIndices.add(newcur);
+                T val = arr[cur2];
+                CopyEvent<Integer> copies = new CopyEvent<Integer>((int)val, copyIndices);
+                events.add(copies);
+
                 new_arr[newcur++] = arr[cur2++];
             } 
         }
 
         // catch cursors up after 1 half is fully sorted
         while (cur1 <= mid) {
+
+            List<Integer> copyIndices = new ArrayList<>();
+            copyIndices.add(newcur);
+            T val = arr[cur1];
+            CopyEvent<Integer> copies = new CopyEvent<Integer>((int)val, copyIndices);
+            events.add(copies);
+
             new_arr[newcur++] = arr[cur1++];
         }
         while (cur2 <= lst) {
+
+            List<Integer> copyIndices = new ArrayList<>();
+            copyIndices.add(newcur);
+            T val = arr[cur2];
+            CopyEvent<Integer> copies = new CopyEvent<Integer>((int)val, copyIndices);
+            events.add(copies);
+
             new_arr[newcur++] = arr[cur2++];
         }
 
@@ -238,22 +259,26 @@ public class Sorts {
         swapIndices.add(cur2);
         SwapEvent<Integer> swaps = new SwapEvent<>(swapIndices);
         events.add(swaps);
+        
         swap(arr, part, cur2);
 
         while (c1 <= c2) {
+
             List<Integer> compareIndices = new ArrayList<>();
             compareIndices.add(c1);
             compareIndices.add(cur2);
             CompareEvent<Integer> compares = new CompareEvent<>(compareIndices);
             events.add(compares);
+
             if (arr[c1].compareTo(arr[cur2]) <= 0) {
                 c1++;
             } else {
                 List<Integer> swapIndices2 = new ArrayList<>();
                 swapIndices2.add(c1);
                 swapIndices2.add(c2);
-                SwapEvent<Integer> swaps2 = new SwapEvent<>(swapIndices);
+                SwapEvent<Integer> swaps2 = new SwapEvent<>(swapIndices2);
                 events.add(swaps2);
+
                 swap(arr, c1, c2);
                 c2--;
             }
@@ -262,8 +287,9 @@ public class Sorts {
         List<Integer> swapIndices3 = new ArrayList<>();
         swapIndices3.add(c1);
         swapIndices3.add(cur2);
-        SwapEvent<Integer> swaps3 = new SwapEvent<>(swapIndices);
+        SwapEvent<Integer> swaps3 = new SwapEvent<>(swapIndices3);
         events.add(swaps3);
+
         swap(arr, c1, cur2);  // place pivot in back
 
         // recurse on both sides

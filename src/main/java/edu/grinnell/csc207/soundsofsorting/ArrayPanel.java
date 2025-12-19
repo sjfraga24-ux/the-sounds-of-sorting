@@ -1,6 +1,7 @@
 package edu.grinnell.csc207.soundsofsorting;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.lang.reflect.Array;
 
 import javax.swing.JPanel;
 
@@ -13,6 +14,7 @@ public class ArrayPanel extends JPanel {
     @SuppressWarnings("unused")
     private NoteIndices notes;
     int width;
+
    
     /**
      * Create a new <code>ArrayPanel</code> with the given notes and dimensions.
@@ -29,22 +31,33 @@ public class ArrayPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         int barWidth = width/notes.scale.size();
-        int idx = 0;
+        int[] idxs = new int[3];
+        int highLightCount = 0;
+        int max = 390; 
         if(notes.getNotes().length == 17){
+            g.clearRect(0, 0, width, max);
             for(int i = 0, j = 0; j < notes.getNotes().length; i+= barWidth, j++){
                 if(notes.isHighlighted(j)){
-                    
-                    for(int z = j+1; z < notes.getNotes().length; z++){
-                        if(notes.isHighlighted(z)){
-                            idx = z;
-                            notes.clearAllHighlighted();
+                    if(highLightCount == 1){
+                        idxs[2] = j;
+                        g.drawRect(i, 0, barWidth, ControlPanel.bMinorPentatonicValues[(int)(notes.getNotes()[idxs[0]])]);
+                        g.drawRect(idxs[1], 0, barWidth, ControlPanel.bMinorPentatonicValues[(int)(notes.getNotes()[idxs[2]])]);
+                        highLightCount=0;
+
+                    }else{
+                        idxs[0] = j;
+                        idxs[1] = i;
+                        highLightCount++;
+                    }
+                }else{
+                    if(idxs[2] == 0){
+                        g.drawRect(i, 0, barWidth, ControlPanel.bMinorPentatonicValues[(int)(notes.getNotes()[j])]);
+                    }else{
+                        if(j != idxs[0] && j!=idxs[2]){
+                            g.drawRect(i, 0, barWidth, ControlPanel.bMinorPentatonicValues[(int)(notes.getNotes()[j])]);
                         }
                     }
-                    // g.drawRect(,0, barWidth, ControlPanel.bMinorPentatonicValues[(int)(notes.getNotes()[idx])]};
-                    g.drawRect(i, 0, barWidth, ControlPanel.bMinorPentatonicValues[(int)(notes.getNotes()[idx])]);
-  
-                }else{
-                    g.drawRect(i, 0, barWidth, ControlPanel.bMinorPentatonicValues[(int)(notes.getNotes()[j])]);
+                    
                 }
             }
         }else{

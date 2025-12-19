@@ -48,14 +48,30 @@ public class SortsTests {
         testSort(Sorts::bubbleSort);
     }
 
+
+    @Test
+    public void testBubbleSort2() {
+        Integer[] arr = {5,3,19,35,2,7,84,1};
+        Sorts.bubbleSort(arr);
+        assertTrue(sorted(arr));
+    }
+
+    @Test
+    public void testBubbleSort3() {
+        Integer[] arr = {5,100,19,0,2,2,84,-2};
+        Sorts.bubbleSort(arr);
+        assertTrue(sorted(arr));
+    }
+
     @Test
     public void testBubbleEvent(){
         Integer[] arr = makeTestArray();
-        List<SortEvent<Integer>> events = Sorts.bubbleSort(arr);
+        Integer[] copy = makeTestArray();
+        List<SortEvent<Integer>> events = Sorts.selectionSort(arr);
         for(int i = 0; i < events.size(); i++){
-            events.get(i).apply(arr);
+            events.get(i).apply(copy);
         }
-        assertTrue(sorted(arr));
+        assertTrue(sorted(copy));
     }
     
     @Test
@@ -64,13 +80,29 @@ public class SortsTests {
     }
 
     @Test
+    public void testInsertSort2() {
+        Integer[] arr = {5,3,19,35,2,7,84,1};
+        Sorts.insertionSort(arr);
+        assertTrue(sorted(arr));
+    }
+
+    @Test
+    public void testInsertSort3() {
+        Integer[] arr = {5,100,19,0,2,2,84,-2};
+        Sorts.insertionSort(arr);
+        assertTrue(sorted(arr));
+    }
+
+
+    @Test
     public void testInsertionEvent(){
         Integer[] arr = makeTestArray();
+        Integer[] copy = makeTestArray();
         List<SortEvent<Integer>> events = Sorts.insertionSort(arr);
         for(int i = 0; i < events.size(); i++){
-            events.get(i).apply(arr);
+            events.get(i).apply(copy);
         }
-        assertTrue(sorted(arr));
+        assertTrue(sorted(copy));
     }
     
     @Test
@@ -79,13 +111,28 @@ public class SortsTests {
     }
 
     @Test
+    public void testSelectSort2() {
+        Integer[] arr = {5,3,19,35,2,7,84,1};
+        Sorts.selectionSort(arr);
+        assertTrue(sorted(arr));
+    }
+
+    @Test
+    public void testSelectSort3() {
+        Integer[] arr = {5,100,19,0,2,2,84,-2};
+        Sorts.selectionSort(arr);
+        assertTrue(sorted(arr));
+    }
+
+    @Test
     public void testSelectionEvent(){
         Integer[] arr = makeTestArray();
+        Integer[] copy = makeTestArray();
         List<SortEvent<Integer>> events = Sorts.selectionSort(arr);
         for(int i = 0; i < events.size(); i++){
-            events.get(i).apply(arr);
+            events.get(i).apply(copy);
         }
-        assertTrue(sorted(arr));
+        assertTrue(sorted(copy));
     }
 
     @Test
@@ -94,31 +141,89 @@ public class SortsTests {
     }
 
     @Test
+    public void testMergeSort2() {
+        Integer[] arr = {5,3,19,35,2,7,84,1};
+        Sorts.mergeSort(arr);
+        assertTrue(sorted(arr));
+    }
+
+    @Test
+    public void testMergeSort3() {
+        Integer[] arr = {5,100,19,0,2,2,84,-2};
+        Sorts.mergeSort(arr);
+        assertTrue(sorted(arr));
+    }
+
+
+
+    @Test
     public void testMergeEvent(){
         Integer[] arr = makeTestArray();
+        Integer[] copy = makeTestArray();
         List<SortEvent<Integer>> events = Sorts.mergeSort(arr);
         for(int i = 0; i < events.size(); i++){
-            events.get(i).apply(arr);
+            events.get(i).apply(copy);
         }
-        assertTrue(sorted(arr));
+        assertTrue(sorted(copy));
     }
     
     @Test
     public void testQuickSort() {
         testSort(Sorts::quickSort);
     }
+
+    @Test
+    public void testQuickSort2() {
+        Integer[] arr = {5,3,19,35,2,7,84,1};
+        Sorts.quickSort(arr);
+        assertTrue(sorted(arr));
+    }
+
+    @Test
+    public void testQuickSort3() {
+        Integer[] arr = {5,100,19,0,2,2,84,-2};
+        Sorts.quickSort(arr);
+        assertTrue(sorted(arr));
+    }
+
+
     @Test
     public void testQuickEvent(){
         Integer[] arr = makeTestArray();
+        Integer[] copy = makeTestArray();
         List<SortEvent<Integer>> events = Sorts.quickSort(arr);
         for(int i = 0; i < events.size(); i++){
-            events.get(i).apply(arr);
+            events.get(i).apply(copy);
         }
-        assertTrue(sorted(arr));
+        assertTrue(sorted(copy));
     }
 
     @Test
     public void testExchangeSort() {
         testSort(Sorts::exchangeSort);
+    }
+    @Test
+    public void testExchangeSort2() {
+        Integer[] arr = {5,3,19,35,2,7,84,1};
+        Sorts.exchangeSort(arr);
+        assertTrue(sorted(arr));
+    }
+
+    @Test
+    public void testExchangeSort3() {
+        Integer[] arr = {5,100,19,0,2,2,84,-2};
+        Sorts.exchangeSort(arr);
+        assertTrue(sorted(arr));
+    }
+
+    @Test
+    public void testExchangeEvent(){
+        Integer[] arr = makeTestArray();
+        Integer[] copy = makeTestArray();
+        List<SortEvent<Integer>> events = Sorts.exchangeSort(arr);
+        for(int i = 0; i < events.size(); i++){
+            events.get(i).apply(copy);
+        }
+        assertTrue(sorted(copy));
     }
 }
